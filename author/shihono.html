@@ -10,7 +10,9 @@
 
 
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/pure/0.3.0/pure-min.css">
-    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.1.0/css/font-awesome.min.css">
+    <!--add new font awesome -->
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!--link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.1.0/css/font-awesome.min.css" -->
     <link rel="stylesheet" href="https://shihono.github.io/theme/css/pure.css">
 
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
@@ -45,6 +47,30 @@
                 <h1 class="content-subhead">
 Posts by 'shihono'                </h1>
 <section class="post">
+    <header class="post-header">
+        <a href="https://shihono.github.io/author/shihono.html" title="See posts by shihono">
+        </a>
+        <h3><a class="post-title" href="https://shihono.github.io/share_post_template.html">共有ボタンを作る</a></h3>
+            <p class="post-meta"><p>使っているテーマのテンプレートには共有ボタンみたいなものがデフォルトでついていません。</p>
+<p>Pelican pluginに<a href="https://github.com/getpelican/pelican-plugins/tree/master/share_post">share_post</a>という拡張プラグインもあるのですが、いまいちわからず。</p>
+<p>簡単に実装できるのではないか、と思い、自分でテンプレートを編集してみることにしました。</p>
+<p>出来上がったものは記事の一番下に設置しています。</p>
+<h3>変更内容</h3>
+<p>今回はtwitterとfacebookだけ作成してみます。
+javascriptなどは使わず、WEB APIを指定したaタグをページに置くことにしました。</p>
+<p>WEB APIはそれぞれ以下の通り。</p>
+<ul>
+<li>twitter : <code>http://twitter.com/share?url={{ 記事のURL }}&amp;text={{ タイトル }}</code></li>
+<li>facebook : <code>https://www.facebook.com/sharer/sharer.php?u={{ 記事のURL }}</code></li>
+</ul>
+<p>これを記事のテンプレート(テーマの<code>templetes/article.html</code>)に組み込みます。記事のURLとタイトルを示す変数は<a href="http://docs.getpelican.com/en/stable/themes.html">ドキュメント</a>を参考にしました。</p>
+<p>表示するアイコンは<a href="http://fontawesome.io/icons/">fontawesome</a>から取得します。</p>
+<p>(表示されないアイコンがあったため、font-awesomeのCDNを新しいversionに変更しました …</p></p>
+            <p class="post-meta">
+                in <a href="https://shihono.github.io/category/memo.html">memo</a> &middot; 27-03-2018
+            </p>
+    </header>
+</section><section class="post">
     <header class="post-header">
         <a href="https://shihono.github.io/author/shihono.html" title="See posts by shihono">
         </a>
