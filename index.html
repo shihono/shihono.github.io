@@ -51,64 +51,43 @@
     <header class="post-header">
         <a href="https://shihono.github.io/author/shihono.html" title="See posts by shihono">
         </a>
-        <h3><a class="post-title" href="https://shihono.github.io/share_post_template.html">共有ボタンを作る</a></h3>
-            <p class="post-meta"><p>使っているテーマのテンプレートには共有ボタンみたいなものがデフォルトでついていません。</p>
-<p>Pelican pluginに<a href="https://github.com/getpelican/pelican-plugins/tree/master/share_post">share_post</a>という拡張プラグインもあるのですが、いまいちわからず。</p>
-<p>簡単に実装できるのではないか、と思い、自分でテンプレートを編集してみることにしました。</p>
-<p>出来上がったものは記事の一番下に設置しています。</p>
-<h3>変更内容</h3>
-<p>今回はtwitterとfacebookだけ作成してみます。
-javascriptなどは使わず、WEB APIを指定したaタグをページに置くことにしました。</p>
-<p>WEB APIはそれぞれ以下の通り。</p>
+        <h3><a class="post-title" href="https://shihono.github.io/timer_js_memo.html">javascriptでtimerをつくりたい(1)</a></h3>
+            <p class="post-meta"><p>研究室の研究会では発表時間が設定されており,先代の方が作成したタイマーで時間を測っている.
+htmlページでjavascriptを用いて,時間を計測するシステムである.</p>
+<p>アラートを鳴らす時間を設定できるので5分ごと,30分後,みたいに細かい設定ができる.</p>
+<p>また,ゆっくりボイスで"x分経過しました"と音声が再生されるので時間を意識しやすいしくみになっている.</p>
+<p>しかし,タイムキーパーをやりながらちょこちょこ不満点が出てきた.</p>
+<p>そして変更したい欲が出てきた.</p>
+<p>変更したい点</p>
 <ul>
-<li>twitter : <code>http://twitter.com/share?url={{ 記事のURL }}&amp;text={{ タイトル }}</code></li>
-<li>facebook : <code>https://www.facebook.com/sharer/sharer.php?u={{ 記事のURL }}</code></li>
+<li>レスポンシブルにしたい<ul>
+<li>画面サイズを変更しても時間が見えるほうが嬉しい</li>
 </ul>
-<p>これを記事のテンプレート(テーマの<code>templetes/article.html</code>)に組み込みます。記事のURLとタイトルを示す変数は<a href="http://docs.getpelican.com/en/stable/themes.html">ドキュメント</a>を参考にしました。</p>
-<p>表示するアイコンは<a href="http://fontawesome.io/icons/">fontawesome</a>から取得します。</p>
-<p>(表示されないアイコンがあったため、font-awesomeのCDNを新しいversionに変更しました …</p></p>
+</li>
+<li>iPadでも音声が再生されるようにしたい<ul>
+<li>PC上で実行しているが,持て余してるiPadをタイマー代わりにしたい(iOSではデータ制限のためか,音声が再生されない)</li>
+</ul>
+</li>
+<li>5分ごと鳴らすのは確定しているので設定を固定にしてしまいたい</li>
+</ul>
+<p>ということで,とりあえず今までのタイマーを参考にしつつ,レスポンシブルに変更したタイマーを作成してみた.</p>
+<p>--&gt; <strong><a href="http://www.cl.ecei.tohoku.ac.jp/~shirai/timer/timer_sample.html">これ</a></strong></p>
+<p>ちょうどjavascriptでなにか作ってみたい,という気持ちがあったのでイチからつくってみた.</p>
+<p>以下作成記録です.</p>
+<h3>ストップウォッチ</h3>
+<p>元ページのソースコードをみると<a href="http://www.scollabo.com/banban/java/jvsample_014.html">ここのサイト</a>のストップウォッチを参考にしていた.
+このコードでは<code>Date</code>と<code>setInterval</code>を使って時間を計測している.</p>
+<h4>Date</h4>
+<p>時間を扱うオブジェクト.</p>
+<p>引数を与えない場合,現在時刻を取得する.</p>
+<div class="highlight"><pre><span></span><span class="nx">Start</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Date</span><span class="p">();</span>
+</pre></div>
+
+
+<p>経過時間を計算したい場合は<code>getTime()</code>を用いる.</p>
+<p>これは1970 …</p></p>
             <p class="post-meta">
-                in <a href="https://shihono.github.io/category/memo.html">memo</a> &middot; 27-03-2018
-            </p>
-    </header>
-</section><section class="post">
-    <header class="post-header">
-        <a href="https://shihono.github.io/author/shihono.html" title="See posts by shihono">
-        </a>
-        <h3><a class="post-title" href="https://shihono.github.io/pelican_setting.html">test's test（＋pelican仕様のメモ）</a></h3>
-            <p class="post-meta"><p>GitHub Pagesをちゃんと使いたい.</p>
-<p>pelicanを設定したものの毎回設定内容を忘れてしまって初期化してました.
-これで3回目です.
-今度こそ,この設定を維持したまま更新します.</p>
-<h3>仕様のメモ</h3>
-<ul>
-<li><a href="http://getpelican.com/">Pelican</a><ul>
-<li>python製の静的サイトジェネレーター</li>
-<li>GitHub Pagesで公開する方法もまとめられていて優しい(<a href="http://docs.getpelican.com/en/3.7.1/tips.html#publishing-to-github">参考</a>)</li>
-</ul>
-</li>
-<li>
-<p>pelican-theme : <a href="https://github.com/PurePelicanTheme/pure">Pure</a></p>
-<ul>
-<li>名前通りpure cssを使っているpelicanのテーマ</li>
-<li>研究室の個人ページでもpureを使っているのでこっちでも使用することにした</li>
-<li>いろんなフレームワーク試した中で一番しっくりきたのがpure. サイトに乗っている<a href="https://purecss.io/layouts/">example layouts</a>もおしゃれなのでそのまま使えるレベル.</li>
-</ul>
-</li>
-<li>
-<p>side-bar image : <a href="https://unsplash.com">unsplash</a></p>
-<ul>
-<li>画像をヘッダー/サイドバーとして設定できるのでunsplashの写真を利用することにした</li>
-<li><a href="https://donsyoku.com/website/about-unsplash.html">参考</a></li>
-<li>APIを叩いて取得することもできる --&gt; <a href="https://source.unsplash.com">Unsplash Source</a></li>
-</ul>
-</li>
-</ul>
-<p>こんなふうに</p>
-<p><img alt="ランダム取得" src="https://source.unsplash.com/random/800x600"></p>
-<p>とりあえずこんな感じでやっていきます. </p></p>
-            <p class="post-meta">
-                in <a href="https://shihono.github.io/category/memo.html">memo</a> &middot; 26-03-2018
+                in <a href="https://shihono.github.io/category/misc.html">misc</a> &middot; 23-04-2018
             </p>
     </header>
 </section><div class="pagination-wrapper content-subhead">

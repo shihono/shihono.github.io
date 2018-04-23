@@ -1,0 +1,177 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="shoo shoo, blog and memo">
+
+
+        <title>javascriptでtimerをつくりたい(1) // shoo shoo // blog and memo</title>
+
+
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/pure/0.3.0/pure-min.css">
+    <!--add new font awesome -->
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!--link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.1.0/css/font-awesome.min.css" -->
+    <link rel="stylesheet" href="https://shihono.github.io/theme/css/pure.css">
+    <link rel="stylesheet" href="https://shihono.github.io/theme/css/pygments.css">
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/fitvids/1.0.1/jquery.fitvids.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $(".content").fitVids();
+        });
+    </script>
+</head>
+
+<body>
+<div class="pure-g-r" id="layout">
+    <div class="sidebar sidebar-article pure-u">
+        <header class="header-article">
+            <hgroup>
+                <a href="https://shihono.github.io/author/shihono.html" title="See posts by shihono">
+                </a>
+                <h2 class="article-info">shihono</h2>
+                <small class="about-author"></small>
+                <h5>Published</h5>
+                <p>23-04-2018</p>
+                <a href="/">&larr;Home</a>
+            </hgroup>
+        </header>
+    </div>
+    <div class="pure-u">
+        <div class="content">
+            <section class="post">
+                <header class="post-header">
+                    <h1>javascriptでtimerをつくりたい(1)</h1>
+                        <p class="post-meta">
+                            // under                                 <a class="post-category" href="https://shihono.github.io/tag/javascript.html">javascript</a>
+                                <a class="post-category" href="https://shihono.github.io/tag/web_api.html">web_api</a>
+                        </p>
+                </header>
+            </section>
+            <p>研究室の研究会では発表時間が設定されており,先代の方が作成したタイマーで時間を測っている.
+htmlページでjavascriptを用いて,時間を計測するシステムである.</p>
+<p>アラートを鳴らす時間を設定できるので5分ごと,30分後,みたいに細かい設定ができる.</p>
+<p>また,ゆっくりボイスで"x分経過しました"と音声が再生されるので時間を意識しやすいしくみになっている.</p>
+<p>しかし,タイムキーパーをやりながらちょこちょこ不満点が出てきた.</p>
+<p>そして変更したい欲が出てきた.</p>
+<p>変更したい点</p>
+<ul>
+<li>レスポンシブルにしたい<ul>
+<li>画面サイズを変更しても時間が見えるほうが嬉しい</li>
+</ul>
+</li>
+<li>iPadでも音声が再生されるようにしたい<ul>
+<li>PC上で実行しているが,持て余してるiPadをタイマー代わりにしたい(iOSではデータ制限のためか,音声が再生されない)</li>
+</ul>
+</li>
+<li>5分ごと鳴らすのは確定しているので設定を固定にしてしまいたい</li>
+</ul>
+<p>ということで,とりあえず今までのタイマーを参考にしつつ,レスポンシブルに変更したタイマーを作成してみた.</p>
+<p>--&gt; <strong><a href="http://www.cl.ecei.tohoku.ac.jp/~shirai/timer/timer_sample.html">これ</a></strong></p>
+<p>ちょうどjavascriptでなにか作ってみたい,という気持ちがあったのでイチからつくってみた.</p>
+<p>以下作成記録です.</p>
+<h3>ストップウォッチ</h3>
+<p>元ページのソースコードをみると<a href="http://www.scollabo.com/banban/java/jvsample_014.html">ここのサイト</a>のストップウォッチを参考にしていた.
+このコードでは<code>Date</code>と<code>setInterval</code>を使って時間を計測している.</p>
+<h4>Date</h4>
+<p>時間を扱うオブジェクト.</p>
+<p>引数を与えない場合,現在時刻を取得する.</p>
+<div class="highlight"><pre><span></span><span class="nx">Start</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Date</span><span class="p">();</span>
+</pre></div>
+
+
+<p>経過時間を計算したい場合は<code>getTime()</code>を用いる.</p>
+<p>これは1970/1/1からの経過時間(ミリ秒)を求めるので時間<code>Start</code>から<code>Stop</code>までの経過時間<code>T</code>は以下のように計算できる.</p>
+<div class="highlight"><pre><span></span><span class="nx">T</span> <span class="o">=</span> <span class="nx">Stop</span><span class="p">.</span><span class="nx">getTime</span><span class="p">()</span> <span class="o">-</span> <span class="nx">Start</span><span class="p">.</span><span class="nx">getTime</span><span class="p">();</span>
+</pre></div>
+
+
+<h4>setInterval</h4>
+<p>一定時間ごとに関数を呼び出す.
+引数の関数名はクオーテーションで囲む必要がある.</p>
+<div class="highlight"><pre><span></span><span class="nx">myInterval</span><span class="o">=</span><span class="nx">setInterval</span><span class="p">(</span><span class="s2">&quot;myWatch(1)&quot;</span><span class="p">,</span><span class="mi">1</span><span class="p">);</span>
+</pre></div>
+
+
+<p><code>clearInterval()</code>で解除するまで実行し続ける.</p>
+<h3>拡張したところ</h3>
+<h4>一時停止とリセット</h4>
+<p>上のコードだと停止させて再び実行させるとリセットされてしまう.</p>
+<p>そこでタイマーを実行する時,すでにタイマーが動作しているかどうかのフラグ<code>action_flug</code>と今まで実行していた時間を記録しておく<code>pause_time</code>を新しく実装した.</p>
+<p><code>action_flug</code>が立っていればストップするときにスタートから現時刻までの時間を<code>pause_time</code>に記録しておき,もう一度スタートする時は開始時間から<code>pause_time</code>を引くようにする.</p>
+<p>これにより一時停止が可能になった.</p>
+<p>また,一時停止を実装することでリセット機能が新たに必要になったので<code>resetTimer()</code>追加した.これは<code>clearInterval()</code>を実行する関数である.</p>
+<h4>レスポンシブル</h4>
+<p>時間がずれる原因となるのでなるべく軽いフレームワークがいい.</p>
+<p>軽いcssにしたいと思った結果<a href="https://picturepan2.github.io/spectre/">spectre</a>を一旦採用してみた.</p>
+<p>実行はうまくいってる感じ.配色はのちのち考えようと思う.</p>
+<h3>これから</h3>
+<ul>
+<li>音が鳴るように(Audio Web api?)</li>
+<li>音が鳴る時間の設定方法(webアプリにしてもいいかもしれない)</li>
+</ul>
+<h3>参考</h3>
+<ul>
+<li><a href="https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/Date">Date - JavaScript | MDN</a></li>
+<li><a href="https://developer.mozilla.org/ja/docs/Web/API/Window/setInterval">WindowOrWorkerGlobalScope.setInterval() - Web API インターフェイス | MDN</a></li>
+<li><a href="http://www.pori2.net/js/timer/1.html">一定時間で繰り返す（setInterval）－JavaScript入門</a></li>
+</ul>
+            <!-- my setting : share botton-->
+            <p>
+                share:
+                <a href="http://twitter.com/share?url=https://shihono.github.io/timer_js_memo.html&text=javascriptでtimerをつくりたい(1)//shoo shoo">
+                    <i class="fa fa-twitter fa-2x"></i>
+                </a>
+                <a href="https://www.facebook.com/sharer/sharer.php?u=https://shihono.github.io/timer_js_memo.html">
+                    <i class="fa fa-facebook-square fa-2x"></i>
+                </a>
+            </p>
+            <div class="hr"></div>
+            <a href="#" class="go-top">Go Top</a>
+<footer class="footer">
+    <p>&copy; shoo shoo &ndash;
+        Built with <a href="https://github.com/PurePelicanTheme/pure">Pure Theme</a>
+        for <a href="http://blog.getpelican.com/">Pelican</a>
+    </p>
+</footer>        </div>
+    </div>
+</div>
+    <script>
+        var $top = $('.go-top');
+
+        // Show or hide the sticky footer button
+        $(window).scroll(function() {
+            if ($(this).scrollTop() > 200) {
+                $top.fadeIn(200);
+            } else {
+                $top.fadeOut(200);
+            }
+        });
+
+        // Animate the scroll to top
+        $top.click(function(event) {
+            event.preventDefault();
+            $('html, body').animate({scrollTop: 0}, 300);
+        })
+
+        // Makes sure that the href="#" attached to the <a> elements
+        // don't scroll you back up the page.
+        $('body').on('click', 'a[href="#"]', function(event) {
+            event.preventDefault();
+        });
+    </script>
+    <script type="text/javascript">
+        var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+        document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+    </script>
+    <script type="text/javascript">
+        try {
+            var pageTracker = _gat._getTracker("UA-116542675-1");
+            pageTracker._trackPageview();
+            } catch(err) {}
+    </script>
+</body>
+</html>
