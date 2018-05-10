@@ -6,7 +6,7 @@
     <meta name="description" content="shoo shoo, blog and memo">
 
 
-        <title>all posts // shoo shoo // blog and memo</title>
+        <title>python tag // shoo shoo // blog and memo</title>
 
 
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/pure/0.3.0/pure-min.css">
@@ -43,48 +43,62 @@
     </div>
 </div>    <div class="pure-u-1">
         <div class="content">
-            <h1 class="content-subhead">All posts</h1>
-                <div class="archive-item">
-                    <a href="https://shihono.github.io/author/shihono.html" title="See posts by shihono">
-                    </a>
-                    <h5 class="archive-date">2018</h5>
-                    <h4 class="archive-date">10 5月</h4>
-                    <div class="archive-post"><a href="deploy_flask_heroku.html">flaskをherokuにdeployする</a></div>
-                    <p class="archive-meta">shihono in <a href="https://shihono.github.io/category/python.html">python</a></p>
-                </div>
-                <div class="archive-item">
-                    <a href="https://shihono.github.io/author/shihono.html" title="See posts by shihono">
-                    </a>
-                    <h5 class="archive-date">2018</h5>
-                    <h4 class="archive-date">23 4月</h4>
-                    <div class="archive-post"><a href="timer_js_memo.html">javascriptでtimerをつくりたい(1)</a></div>
-                    <p class="archive-meta">shihono in <a href="https://shihono.github.io/category/web_page.html">web_page</a></p>
-                </div>
-                <div class="archive-item">
-                    <a href="https://shihono.github.io/author/shihono.html" title="See posts by shihono">
-                    </a>
-                    <h5 class="archive-date">2018</h5>
-                    <h4 class="archive-date">27 3月</h4>
-                    <div class="archive-post"><a href="share_post_template.html">共有ボタンを作る</a></div>
-                    <p class="archive-meta">shihono in <a href="https://shihono.github.io/category/memo.html">memo</a></p>
-                </div>
-                <div class="archive-item">
-                    <a href="https://shihono.github.io/author/shihono.html" title="See posts by shihono">
-                    </a>
-                    <h5 class="archive-date">2018</h5>
-                    <h4 class="archive-date">26 3月</h4>
-                    <div class="archive-post"><a href="pelican_setting.html">test's test（＋pelican仕様のメモ）</a></div>
-                    <p class="archive-meta">shihono in <a href="https://shihono.github.io/category/memo.html">memo</a></p>
-                </div>
-        </div>
-    </div>
-</div>
-<footer class="footer">
+            <!-- A wrapper for all the blog posts -->
+            <div class="posts">
+                <h1 class="content-subhead">
+Posts tagged 'python'                </h1>
+<section class="post">
+    <header class="post-header">
+        <a href="https://shihono.github.io/author/shihono.html" title="See posts by shihono">
+        </a>
+        <h3><a class="post-title" href="https://shihono.github.io/deploy_flask_heroku.html">flaskをherokuにdeployする</a></h3>
+            <p class="post-meta"><p>Flaskで作ったアプリをHerokuにデプロイしたかったのだが,色々突っかかったのでメモ.</p>
+<h2>ファイル一覧</h2>
+<h3>Flaskファイル</h3>
+<p><a href="http://flask.pocoo.org">Flask</a>は1つのPythonファイルでアプリを作成できる便利なフレームワーク.</p>
+<p><a href="https://github.com/datademofun/heroku-basic-flask">heroku-basic-flask</a>にならって<code>app.py</code>を作成.</p>
+<ul>
+<li>app.py<ul>
+<li><code>Hello heroku</code>と時刻を表示させるだけのコード</li>
+</ul>
+</li>
+</ul>
+<h3>Herokuに必要なファイル</h3>
+<p>この記事のメイン.</p>
+<p>Herokuに依存関係を特定させるために以下のファイルを作成する必要がある.(以下のファイルは<code>app.py</code>と同じ階層に置く)</p>
+<ul>
+<li>
+<p>Procfile</p>
+<ul>
+<li>実行するコマンドを宣言するファイル</li>
+<li><a href="https://devcenter.heroku.com/articles/python-gunicorn">gnicorn</a>を使うといいみたいなのでpip installしておく</li>
+<li>書き方は<code>プロセスタイプ:コマンド</code> という感じ.</li>
+<li>app.pyを実行してほしい --&gt; <code>web: gunicorn app:app --log-file=-</code></li>
+</ul>
+</li>
+<li>
+<p>requirements.txt</p>
+<ul>
+<li>必要なPythonパッケージを記入<ul>
+<li><code>Flask</code>,<code>gnicorn</code> etc...</li>
+</ul>
+</li>
+<li>バージョンも書いておかないと<code>No such file or …</code></li></ul></li></ul></p>
+            <p class="post-meta">
+                in <a href="https://shihono.github.io/category/python.html">python</a> &middot; 10-05-2018
+            </p>
+    </header>
+</section><div class="pagination-wrapper content-subhead">
+</div><footer class="footer">
     <p>&copy; shoo shoo &ndash;
         Built with <a href="https://github.com/PurePelicanTheme/pure">Pure Theme</a>
         for <a href="http://blog.getpelican.com/">Pelican</a>
     </p>
-</footer>    <script>
+</footer>            </div>
+        </div>
+    </div>
+</div>
+    <script>
         var $top = $('.go-top');
 
         // Show or hide the sticky footer button

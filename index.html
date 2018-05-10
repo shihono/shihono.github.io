@@ -52,6 +52,47 @@
     <header class="post-header">
         <a href="https://shihono.github.io/author/shihono.html" title="See posts by shihono">
         </a>
+        <h3><a class="post-title" href="https://shihono.github.io/deploy_flask_heroku.html">flaskをherokuにdeployする</a></h3>
+            <p class="post-meta"><p>Flaskで作ったアプリをHerokuにデプロイしたかったのだが,色々突っかかったのでメモ.</p>
+<h2>ファイル一覧</h2>
+<h3>Flaskファイル</h3>
+<p><a href="http://flask.pocoo.org">Flask</a>は1つのPythonファイルでアプリを作成できる便利なフレームワーク.</p>
+<p><a href="https://github.com/datademofun/heroku-basic-flask">heroku-basic-flask</a>にならって<code>app.py</code>を作成.</p>
+<ul>
+<li>app.py<ul>
+<li><code>Hello heroku</code>と時刻を表示させるだけのコード</li>
+</ul>
+</li>
+</ul>
+<h3>Herokuに必要なファイル</h3>
+<p>この記事のメイン.</p>
+<p>Herokuに依存関係を特定させるために以下のファイルを作成する必要がある.(以下のファイルは<code>app.py</code>と同じ階層に置く)</p>
+<ul>
+<li>
+<p>Procfile</p>
+<ul>
+<li>実行するコマンドを宣言するファイル</li>
+<li><a href="https://devcenter.heroku.com/articles/python-gunicorn">gnicorn</a>を使うといいみたいなのでpip installしておく</li>
+<li>書き方は<code>プロセスタイプ:コマンド</code> という感じ.</li>
+<li>app.pyを実行してほしい --&gt; <code>web: gunicorn app:app --log-file=-</code></li>
+</ul>
+</li>
+<li>
+<p>requirements.txt</p>
+<ul>
+<li>必要なPythonパッケージを記入<ul>
+<li><code>Flask</code>,<code>gnicorn</code> etc...</li>
+</ul>
+</li>
+<li>バージョンも書いておかないと<code>No such file or …</code></li></ul></li></ul></p>
+            <p class="post-meta">
+                in <a href="https://shihono.github.io/category/python.html">python</a> &middot; 10-05-2018
+            </p>
+    </header>
+</section><section class="post">
+    <header class="post-header">
+        <a href="https://shihono.github.io/author/shihono.html" title="See posts by shihono">
+        </a>
         <h3><a class="post-title" href="https://shihono.github.io/timer_js_memo.html">javascriptでtimerをつくりたい(1)</a></h3>
             <p class="post-meta"><p>研究室の研究会では発表時間が設定されており,先代の方が作成したタイマーで時間を測っている.
 htmlページでjavascriptを用いて,時間を計測するシステムである.</p>

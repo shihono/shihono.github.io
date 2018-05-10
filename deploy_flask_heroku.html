@@ -1,0 +1,191 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="shoo shoo, blog and memo">
+
+
+        <title>flaskをherokuにdeployする // shoo shoo // blog and memo</title>
+
+
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/pure/0.3.0/pure-min.css">
+    <!--add new font awesome -->
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!--link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.1.0/css/font-awesome.min.css" -->
+    <link rel="stylesheet" href="https://shihono.github.io/theme/css/pure.css">
+    <link rel="stylesheet" href="https://shihono.github.io/theme/css/pygments.css">
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/fitvids/1.0.1/jquery.fitvids.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $(".content").fitVids();
+        });
+    </script>
+</head>
+
+<body>
+<div class="pure-g-r" id="layout">
+    <div class="sidebar sidebar-article pure-u">
+        <header class="header-article">
+            <hgroup>
+                <a href="https://shihono.github.io/author/shihono.html" title="See posts by shihono">
+                </a>
+                <h2 class="article-info">shihono</h2>
+                <small class="about-author"></small>
+                <h5>Published</h5>
+                <p>10-05-2018</p>
+                <a href="/">&larr;Home</a>
+            </hgroup>
+        </header>
+    </div>
+    <div class="pure-u">
+        <div class="content">
+            <section class="post">
+                <header class="post-header">
+                    <h1>flaskをherokuにdeployする</h1>
+                        <p class="post-meta">
+                            // under                                 <a class="post-category" href="https://shihono.github.io/tag/python.html">python</a>
+                                <a class="post-category" href="https://shihono.github.io/tag/flask.html">flask</a>
+                                <a class="post-category" href="https://shihono.github.io/tag/heroku.html">heroku</a>
+                        </p>
+                </header>
+            </section>
+            <p>Flaskで作ったアプリをHerokuにデプロイしたかったのだが,色々突っかかったのでメモ.</p>
+<h2>ファイル一覧</h2>
+<h3>Flaskファイル</h3>
+<p><a href="http://flask.pocoo.org">Flask</a>は1つのPythonファイルでアプリを作成できる便利なフレームワーク.</p>
+<p><a href="https://github.com/datademofun/heroku-basic-flask">heroku-basic-flask</a>にならって<code>app.py</code>を作成.</p>
+<ul>
+<li>app.py<ul>
+<li><code>Hello heroku</code>と時刻を表示させるだけのコード</li>
+</ul>
+</li>
+</ul>
+<h3>Herokuに必要なファイル</h3>
+<p>この記事のメイン.</p>
+<p>Herokuに依存関係を特定させるために以下のファイルを作成する必要がある.(以下のファイルは<code>app.py</code>と同じ階層に置く)</p>
+<ul>
+<li>
+<p>Procfile</p>
+<ul>
+<li>実行するコマンドを宣言するファイル</li>
+<li><a href="https://devcenter.heroku.com/articles/python-gunicorn">gnicorn</a>を使うといいみたいなのでpip installしておく</li>
+<li>書き方は<code>プロセスタイプ:コマンド</code> という感じ.</li>
+<li>app.pyを実行してほしい --&gt; <code>web: gunicorn app:app --log-file=-</code></li>
+</ul>
+</li>
+<li>
+<p>requirements.txt</p>
+<ul>
+<li>必要なPythonパッケージを記入<ul>
+<li><code>Flask</code>,<code>gnicorn</code> etc...</li>
+</ul>
+</li>
+<li>バージョンも書いておかないと<code>No such file or directory</code>となり、コンパイルできなかった<ul>
+<li><strong>BAD</strong> <code>Flask</code></li>
+<li>--&gt; <strong>GOOD</strong> <code>Flask==0.12.2</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>runtime.txt<ul>
+<li>pythonのバージョンを記入 (like <code>python-X.X.X</code>)</li>
+<li>自分のバージョンはサポートされていないと忠告が表示された(下記ログ参照)ので最新の<code>python-3.6.5</code>に変更した</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><pre><span></span>!     The latest version of Python 3 is python-3.6.5 (you are using python-3.5.3, which is unsupported).
+!     We recommend upgrading by specifying the latest version (python-3.6.5).
+       Learn More: https://devcenter.heroku.com/articles/python-runtimes
+</pre></div>
+
+
+<h2>デプロイ</h2>
+<p>今回はHeroku CLIを利用.</p>
+<p>Herokuのdeployセッティングに書いてあるとおりにカタカタと書いていく.具体的には</p>
+<ul>
+<li><code>heroku login</code>でログイン</li>
+<li>gitを初期化してremoteをcloneする</li>
+</ul>
+<div class="highlight"><pre><span></span>git init
+heroku git:clone -a heroku-app-name
+</pre></div>
+
+
+<ul>
+<li>あとは<code>git add + commit</code>して,<code>git push heroku master</code>でデプロイ完了</li>
+</ul>
+<p>結果 : <a href="https://warm-plateau-56649.herokuapp.com">https://warm-plateau-56649.herokuapp.com</a></p>
+<h2>所感</h2>
+<ul>
+<li>大きいアプリにするならProcfileの仕組みをちゃんと理解したほうがよさげ<ul>
+<li>gnicornも</li>
+<li>サーバーに関する知識不足を痛感</li>
+</ul>
+</li>
+<li>もう少し深掘りして完成したアプリをデプロイできるようにしたい</li>
+</ul>
+<h2>参考</h2>
+<ul>
+<li><a href="https://github.com/datademofun/heroku-basic-flask">heroku-basic-flask</a></li>
+<li><a href="https://qiita.com/sqrtxx/items/2ae41d5685e07c16eda5">Flask を触ってみる + Heroku で動かす</a></li>
+<li><a href="https://github.com/herokaijp/devcenter/wiki">Heroku Dev Centerの日本語訳プロジェクト</a></li>
+</ul>
+            <!-- my setting : share botton-->
+            <p>
+                share:
+                <a href="http://twitter.com/share?url=https://shihono.github.io/deploy_flask_heroku.html&text=flaskをherokuにdeployする//shoo shoo">
+                    <i class="fa fa-twitter fa-2x"></i>
+                </a>
+                <a href="https://www.facebook.com/sharer/sharer.php?u=https://shihono.github.io/deploy_flask_heroku.html">
+                    <i class="fa fa-facebook-square fa-2x"></i>
+                </a>
+            </p>
+            <div class="hr"></div>
+            <a href="#" class="go-top">Go Top</a>
+<footer class="footer">
+    <p>&copy; shoo shoo &ndash;
+        Built with <a href="https://github.com/PurePelicanTheme/pure">Pure Theme</a>
+        for <a href="http://blog.getpelican.com/">Pelican</a>
+    </p>
+</footer>        </div>
+    </div>
+</div>
+    <script>
+        var $top = $('.go-top');
+
+        // Show or hide the sticky footer button
+        $(window).scroll(function() {
+            if ($(this).scrollTop() > 200) {
+                $top.fadeIn(200);
+            } else {
+                $top.fadeOut(200);
+            }
+        });
+
+        // Animate the scroll to top
+        $top.click(function(event) {
+            event.preventDefault();
+            $('html, body').animate({scrollTop: 0}, 300);
+        })
+
+        // Makes sure that the href="#" attached to the <a> elements
+        // don't scroll you back up the page.
+        $('body').on('click', 'a[href="#"]', function(event) {
+            event.preventDefault();
+        });
+    </script>
+    <script type="text/javascript">
+        var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+        document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+    </script>
+    <script type="text/javascript">
+        try {
+            var pageTracker = _gat._getTracker("UA-116542675-1");
+            pageTracker._trackPageview();
+            } catch(err) {}
+    </script>
+</body>
+</html>
