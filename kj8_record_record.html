@@ -1,0 +1,220 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="shoo shoo, blog and memo">
+
+
+        <title>djangoアプリをつくってherokuに公開しました // shoo shoo // blog and memo</title>
+
+
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/pure/0.3.0/pure-min.css">
+    <!--add new font awesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/v4-shims.css">
+    <!--link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.1.0/css/font-awesome.min.css" -->
+    <link rel="stylesheet" href="https://shihono.github.io/theme/css/pure.css">
+    <link rel="stylesheet" href="https://shihono.github.io/theme/css/pygments.css">
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/fitvids/1.0.1/jquery.fitvids.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $(".content").fitVids();
+        });
+    </script>
+</head>
+
+<body>
+<div class="pure-g-r" id="layout">
+    <div class="sidebar sidebar-article pure-u">
+        <header class="header-article">
+            <hgroup>
+                <a href="https://shihono.github.io/author/shihono.html" title="See posts by shihono">
+                </a>
+                <h2 class="article-info">shihono</h2>
+                <small class="about-author"></small>
+                <h5>Published</h5>
+                <p>31-08-2018</p>
+                <a href="/">&larr;Home</a>
+            </hgroup>
+        </header>
+    </div>
+    <div class="pure-u">
+        <div class="content">
+            <section class="post">
+                <header class="post-header">
+                    <h1>djangoアプリをつくってherokuに公開しました</h1>
+                        <p class="post-meta">
+                            // under                                 <a class="post-category" href="https://shihono.github.io/tag/python.html">python</a>
+                                <a class="post-category" href="https://shihono.github.io/tag/django.html">django</a>
+                                <a class="post-category" href="https://shihono.github.io/tag/heroku.html">heroku</a>
+                        </p>
+                </header>
+            </section>
+            <p>タイトル通り,djangoアプリをつくってherokuに公開しました.</p>
+<p><i class="fa fa-infinity"></i> <strong>kj8recordrecord</strong> という趣味全開のアプリです.</p>
+<p>URL： <a href="https://kj8-record-record.herokuapp.com">https://kj8-record-record.herokuapp.com</a></p>
+<p><a href="https://github.com/shihono/kj8-record-record">github</a>にコードをあげています.</p>
+<h3>どんなアプリ？</h3>
+<p>関ジャニ∞の曲名・CD情報を表示するアプリケーションです(<strong>関ジャニ∞だけ</strong>です) </p>
+<p>表示できること</p>
+<ul>
+<li>CD一覧</li>
+<li>CDの収録曲</li>
+<li>表示された曲と同じ曲名が収録されたCD</li>
+</ul>
+<h3>作成手順</h3>
+<ol>
+<li>データ作成</li>
+<li>データベースにいれる   </li>
+<li>表示機能の作成</li>
+<li>herokuにdeploy</li>
+</ol>
+<p>それぞれ詳細について書きます.</p>
+<h4>データ作成</h4>
+<p>欲しいデータは以下のようなもの.</p>
+<ul>
+<li>CD ： タイトル, シングルorアルバム, 発売日 (model : Disc)</li>
+<li>曲 ： タイトル, 収録されているCD, CD内の曲順  (model : Song)</li>
+</ul>
+<p>早速曲情報データベースから取得しようとしたものの</p>
+<ul>
+<li><a href="http://www2.jasrac.or.jp/eJwid/index.html">ジャスラック</a> ：曲情報だけ</li>
+<li><a href="https://musicbrainz.org/">MusicBrain</a>：2014年で情報が止まっている</li>
+<li><a href="https://freedbtest.dyndns.org">freedb</a>： 情報にヌケモレがあるためスクレイピング後にゴミ取り作業が発生する</li>
+</ul>
+<p>といった理由から, 最終的にはwikipediaからスクレイピングすることにしました.</p>
+<p><a href="https://ja.wikipedia.org/wiki/%E9%96%A2%E3%82%B8%E3%83%A3%E3%83%8B%E2%88%9E">関ジャニ∞</a>のディスコグラフィからCD情報を取得.
+その後それぞれのCDページのurlを取得し, ページごと曲名を取得しました.</p>
+<p>主に使ったのは<a href="https://requests-docs-ja.readthedocs.io/en/latest/">requests</a>と<a href="https://www.crummy.com/software/BeautifulSoup/bs4/doc/">beautifulSoup</a>. 
+同じアーティストの場合,　だいたい同じフォーマットで曲名をまとめているので特に苦しまずに一括で取得できました.</p>
+<p>(wikipediaは曲一覧の書き方が表・リストなど多様であるという知見を得る)</p>
+<ul>
+<li>スクレイピングの参考：<a href="https://vaaaaaanquish.hatenablog.com/entry/2017/06/25/202924">PythonでWebスクレイピングする時の知見をまとめておく</a></li>
+</ul>
+<h4>データベースにいれる</h4>
+<p>djangoで設定したデータベース(sqlite)に取得したデータを入れます. 
+一個一個shellで入れても良かったのですが, 今回は<code>initial_data</code>のフォーマットに変換して<code>loaddata</code>することにしました.(細かい話は<a href="https://docs.djangoproject.com/en/1.11/ref/django-admin/#django-admin-loaddata">ここ</a>を参考に)</p>
+<ul>
+<li>入れたい情報<code>fields</code>とは別に<code>model</code>と<code>pk</code>が必要なので結構手間取りました<ul>
+<li><a href="https://docs.djangoproject.com/en/1.11/howto/initial-data/">document</a></li>
+<li><a href="https://stackoverflow.com/questions/45112319/how-to-store-data-into-sqlite-database-from-existing-json-file-in-django">stackoverflow</a></li>
+</ul>
+</li>
+</ul>
+<p>この時点でdjangoのガワ(model定義など)は作成していたのですが, 曲とCDに関係を貼りたかったためモデルに<code>ForeignKey</code>を使っていたりして初期データ作成に結構手間取りました.
+スクレイピング時点ではcsvに保存していたのでpandasをつかってjsonに変換していきました.</p>
+<p>欲しい情報をきちんと定義し, 直接jsonへ変換すべきだったかもしれないです...</p>
+<p>ちなみに, データベースにいれてからのデータの修正は直接コマンドを叩いて行いました<a href="https://docs.djangoproject.com/ja/1.11/topics/db/queries/#updating-multiple-objects-at-once">参考</a></p>
+<h4>表示機能の作成</h4>
+<p>ここらへんは普通のdjangoアプリとだいたい同じ工程です.</p>
+<ul>
+<li><a href="https://docs.djangoproject.com/ja/1.11/intro/tutorial03/">チュートリアル</a>を参考にすれば簡単な表示までは作成できます.</li>
+</ul>
+<p>表示したいページごとに<code>view.py</code>にコードを書くのは結構手間です.しかし, チュートリアルでもある通りテンプレート表示はいろいろと工夫できます.
+今回は<code>generic view</code>をはじめて使ってみました. かなり便利.</p>
+<ul>
+<li>日本語だとこの<a href="https://qiita.com/felyce/items/7d0187485cad4418c073">qiita</a>がいい感じにまとまっています.</li>
+</ul>
+<h5>フロントエンド部分</h5>
+<p>表示のオシャレさを追求したかったので, 色々なツールを試しました. </p>
+<ul>
+<li>フレームワーク : <a href="https://purecss.io">Pure css</a><ul>
+<li>paddingで手間取ってしまったので<a href="https://purecss.io/grids/#applying-padding-and-borders-to-grid-units">メモ</a></li>
+</ul>
+</li>
+<li>背景画像 ： <a href="https://trianglify.io/">trianglify</a> メンバーカラーの7色を使ったグラデーションを意識</li>
+<li>アイコン ： <a href="https://fontawesome.com">fontawesome</a> infinityアイコンをロゴっぽく使用</li>
+</ul>
+<h4>herokuにdeploy</h4>
+<p>herokuアプリに今あるデータを移行したいので, ローカルのデータベースにあるデータを<code>dumpdata</code>で保存します.(最初に<code>loaddata</code>したデータを修正しているためバックアップも兼ねて別ファイルに保存しました)</p>
+<div class="highlight"><pre><span></span>python manage.py dumpdata songinfo.Song songinfo.Disc --format json --indent 1 &gt; songinfo/fixtures/dump_info.json
+</pre></div>
+
+
+<p>このjsonファイルをふくめherokuにdeployしました.(deployの仕方は色んなサイトで紹介されているので割愛)
+heroku上のデータベースを初期化し<code>loaddata</code>すればローカルと同じデータを反映できます.</p>
+<div class="highlight"><pre><span></span>heroku run python manage.py migrate
+heroku run python manage.py createsuperuser
+heroku run python manage.py loaddata song/fixtures/dump_info.json
+</pre></div>
+
+
+<h5>deploy時のエラー</h5>
+<p>deployするとエラーがでまくるのは仕方ないのですが, </p>
+<ul>
+<li>データベースを初期化</li>
+<li>requirement<strong>s</strong></li>
+<li>pythonのバージョン指定</li>
+<li>wsgiの書き方</li>
+</ul>
+<p>とかはやっぱり忘れ/間違いやすいので注意しなきゃなと思いました.</p>
+<p>また, 最初はgithubからdeployしようと思ったのですがpythonだとできないっぽいので普通にCLIでやりました.できたら便利なのですが...</p>
+<h3>最後に</h3>
+<p>頑張ったポイントがほぼ<strong>データ作成</strong>でした. 
+webからデータとってくるのって本当に大変だなと改めて感じています.</p>
+<p>本当は未音原化の曲やライブDVDに関する情報も取得したかったのですが今のモデル定義に組み込むのが<em>めんど...</em>大変そうなので今回は諦めました.</p>
+<p>もう少し便利機能を追加できたらいいなあと思っています.
+また, 新曲が追加されたら現時点では手打ちするしかないので今後の課題です.自動化したい.</p>
+<hr>
+<p>新曲といえば.</p>
+<p>2018/9/5に新曲<a href="https://www.infinity-r.jp/pages/discography/JACA-5756.html"><strong>「ここに」</strong></a>が発売されます.</p>
+<p>6人体制になってからはじめての新曲. ぜひとも注目.</p>
+            <!-- my setting : share botton-->
+            <p>
+                share:
+                <a href="http://twitter.com/share?url=https://shihono.github.io/kj8_record_record.html&text=djangoアプリをつくってherokuに公開しました//shoo shoo">
+                    <i class="fa fa-twitter fa-2x"></i>
+                </a>
+                <a href="https://www.facebook.com/sharer/sharer.php?u=https://shihono.github.io/kj8_record_record.html">
+                    <i class="fa fa-facebook-square fa-2x"></i>
+                </a>
+            </p>
+            <div class="hr"></div>
+            <a href="#" class="go-top">Go Top</a>
+<footer class="footer">
+    <p>&copy; shoo shoo &ndash;
+        Built with <a href="https://github.com/PurePelicanTheme/pure">Pure Theme</a>
+        for <a href="http://blog.getpelican.com/">Pelican</a>
+    </p>
+</footer>        </div>
+    </div>
+</div>
+    <script>
+        var $top = $('.go-top');
+
+        // Show or hide the sticky footer button
+        $(window).scroll(function() {
+            if ($(this).scrollTop() > 200) {
+                $top.fadeIn(200);
+            } else {
+                $top.fadeOut(200);
+            }
+        });
+
+        // Animate the scroll to top
+        $top.click(function(event) {
+            event.preventDefault();
+            $('html, body').animate({scrollTop: 0}, 300);
+        })
+
+        // Makes sure that the href="#" attached to the <a> elements
+        // don't scroll you back up the page.
+        $('body').on('click', 'a[href="#"]', function(event) {
+            event.preventDefault();
+        });
+    </script>
+    <script type="text/javascript">
+        var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+        document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+    </script>
+    <script type="text/javascript">
+        try {
+            var pageTracker = _gat._getTracker("UA-116542675-1");
+            pageTracker._trackPageview();
+            } catch(err) {}
+    </script>
+</body>
+</html>

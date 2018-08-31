@@ -11,7 +11,8 @@
 
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/pure/0.3.0/pure-min.css">
     <!--add new font awesome -->
-    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/v4-shims.css">
     <!--link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.1.0/css/font-awesome.min.css" -->
     <link rel="stylesheet" href="https://shihono.github.io/theme/css/pure.css">
 
@@ -48,6 +49,48 @@
                 <h1 class="content-subhead">
 Posts tagged 'heroku'                </h1>
 <section class="post">
+    <header class="post-header">
+        <a href="https://shihono.github.io/author/shihono.html" title="See posts by shihono">
+        </a>
+        <h3><a class="post-title" href="https://shihono.github.io/kj8_record_record.html">djangoアプリをつくってherokuに公開しました</a></h3>
+            <p class="post-meta"><p>タイトル通り,djangoアプリをつくってherokuに公開しました.</p>
+<p><i class="fa fa-infinity"></i> <strong>kj8recordrecord</strong> という趣味全開のアプリです.</p>
+<p>URL： <a href="https://kj8-record-record.herokuapp.com">https://kj8-record-record.herokuapp.com</a></p>
+<p><a href="https://github.com/shihono/kj8-record-record">github</a>にコードをあげています.</p>
+<h3>どんなアプリ？</h3>
+<p>関ジャニ∞の曲名・CD情報を表示するアプリケーションです(<strong>関ジャニ∞だけ</strong>です) </p>
+<p>表示できること</p>
+<ul>
+<li>CD一覧</li>
+<li>CDの収録曲</li>
+<li>表示された曲と同じ曲名が収録されたCD</li>
+</ul>
+<h3>作成手順</h3>
+<ol>
+<li>データ作成</li>
+<li>データベースにいれる   </li>
+<li>表示機能の作成</li>
+<li>herokuにdeploy</li>
+</ol>
+<p>それぞれ詳細について書きます.</p>
+<h4>データ作成</h4>
+<p>欲しいデータは以下のようなもの.</p>
+<ul>
+<li>CD ： タイトル, シングルorアルバム, 発売日 (model : Disc)</li>
+<li>曲 ： タイトル, 収録されているCD, CD内の曲順  (model : Song)</li>
+</ul>
+<p>早速曲情報データベースから取得しようとしたものの</p>
+<ul>
+<li><a href="http://www2.jasrac.or.jp/eJwid/index.html">ジャスラック</a> ：曲情報だけ</li>
+<li><a href="https://musicbrainz.org/">MusicBrain</a>：2014年で情報が止まっている</li>
+<li><a href="https://freedbtest.dyndns.org">freedb</a>： 情報にヌケモレがあるためスクレイピング後にゴミ取り作業が発生する</li>
+</ul>
+<p>といった理由から …</p></p>
+            <p class="post-meta">
+                in <a href="https://shihono.github.io/category/python.html">python</a> &middot; 31-08-2018
+            </p>
+    </header>
+</section><section class="post">
     <header class="post-header">
         <a href="https://shihono.github.io/author/shihono.html" title="See posts by shihono">
         </a>
