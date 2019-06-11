@@ -131,6 +131,35 @@ Posts in 'python'                </h1>
                 in <a href="https://shihono.github.io/category/python.html">python</a> &middot; 10-05-2018
             </p>
     </header>
+</section><section class="post">
+    <header class="post-header">
+        <a href="https://shihono.github.io/author/shihono.html" title="See posts by shihono">
+        </a>
+        <h3><a class="post-title" href="https://shihono.github.io/itertool_dropwhile_takewhile.html">dropwhileとtakewhileを使う</a></h3>
+            <p class="post-meta"><p>pythonの便利ライブラリ<a href="https://docs.python.jp/3/library/itertools.html">itertools</a>.
+その中の<code>dropwhile</code>と<code>takewhile</code>を使うときのメモ.</p>
+<h2>iteratorの例</h2>
+<p>100本ノック10章91で用いている<a href="https://aclweb.org/aclwiki/Google_analogy_test_set_(State_of_the_art)">単語アナロジー評価データ</a>を例に考えます。</p>
+<blockquote>
+<p>このデータ中で": "で始まる行はセクション名を表す．例えば，": capital-common-countries"という行は，"capital-common-countries"というセクションの開始を表している．</p>
+</blockquote>
+<p><cite><a href="http://www.cl.ecei.tohoku.ac.jp/nlp100/#sec91">言語処理100本ノック 2015より</a></cite></p>
+<h3>dropwhile</h3>
+<p>条件がtrueの間無視(drop)して,falseになった場所からはじめる.
+条件はlambda式を使う。</p>
+<p>例えば<code>family</code>というセクション<em>以降</em>のデータが欲しい時は下のようになる。</p>
+<div class="highlight"><pre><span></span><span class="n">dropwhile</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span> <span class="o">!=</span> <span class="s1">&#39;: family</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">f</span><span class="p">)</span>
+</pre></div>
+
+
+<h3>takewhile</h3>
+<p>条件がtrueの間に続けて,falseになったら終了.</p>
+<p>例えば<code>family</code>というセクション<em>より前</em>のデータだけ取得する時は下のようになる。</p>
+<div class="highlight"><pre><span></span><span class="n">takewhile</span><span class="p">(</span><span class="k">lambda</span> <span class="n">y</span><span class="p">:</span> <span class="n">y …</span></pre></div></p>
+            <p class="post-meta">
+                in <a href="https://shihono.github.io/category/python.html">python</a> &middot; 17-04-2018
+            </p>
+    </header>
 </section><div class="pagination-wrapper content-subhead">
 </div><footer class="footer">
     <p>&copy; shoo shoo &ndash;
