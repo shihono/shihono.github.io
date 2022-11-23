@@ -130,15 +130,15 @@
 </ul>
 <h4>herokuにdeploy</h4>
 <p>herokuアプリに今あるデータを移行したいので, ローカルのデータベースにあるデータを<code>dumpdata</code>で保存します.(最初に<code>loaddata</code>したデータを修正しているためバックアップも兼ねて別ファイルに保存しました)</p>
-<div class="highlight"><pre><span></span><span class="n">python</span> <span class="n">manage</span><span class="p">.</span><span class="n">py</span> <span class="n">dumpdata</span> <span class="n">songinfo</span><span class="p">.</span><span class="n">Song</span> <span class="n">songinfo</span><span class="p">.</span><span class="n">Disc</span> <span class="c1">--format json --indent 1 &gt; songinfo/fixtures/dump_info.json</span>
+<div class="highlight"><pre><span></span><span class="err">python manage.py dumpdata songinfo.Song songinfo.Disc --format json --indent 1 &gt; songinfo/fixtures/dump_info.json</span>
 </pre></div>
 
 
 <p>このjsonファイルをふくめherokuにdeployしました.(deployの仕方は色んなサイトで紹介されているので割愛)
 heroku上のデータベースを初期化し<code>loaddata</code>すればローカルと同じデータを反映できます.</p>
-<div class="highlight"><pre><span></span><span class="n">heroku</span> <span class="n">run</span> <span class="n">python</span> <span class="n">manage</span><span class="p">.</span><span class="n">py</span> <span class="n">migrate</span>
-<span class="n">heroku</span> <span class="n">run</span> <span class="n">python</span> <span class="n">manage</span><span class="p">.</span><span class="n">py</span> <span class="n">createsuperuser</span>
-<span class="n">heroku</span> <span class="n">run</span> <span class="n">python</span> <span class="n">manage</span><span class="p">.</span><span class="n">py</span> <span class="n">loaddata</span> <span class="n">song</span><span class="o">/</span><span class="n">fixtures</span><span class="o">/</span><span class="n">dump_info</span><span class="p">.</span><span class="n">json</span>
+<div class="highlight"><pre><span></span><span class="err">heroku run python manage.py migrate</span>
+<span class="err">heroku run python manage.py createsuperuser</span>
+<span class="err">heroku run python manage.py loaddata song/fixtures/dump_info.json</span>
 </pre></div>
 
 
