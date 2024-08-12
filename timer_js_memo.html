@@ -11,11 +11,9 @@
 
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/pure/0.3.0/pure-min.css">
     <!--add new font awesome -->
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/v4-shims.css">
-    <!--link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.1.0/css/font-awesome.min.css" -->
-    <link rel="stylesheet" href="https://shihono.github.io/theme/css/pure.css">
-    <link rel="stylesheet" href="https://shihono.github.io/theme/css/pygments.css">
+    <script src="https://kit.fontawesome.com/e2c3169965.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="./theme/css/pure.css">
+    <link rel="stylesheet" href="./theme/css/pygments.css">
 
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/fitvids/1.0.1/jquery.fitvids.min.js"></script>
@@ -31,7 +29,7 @@
     <div class="sidebar sidebar-article pure-u">
         <header class="header-article">
             <hgroup>
-                <a href="https://shihono.github.io/author/shihono.html" title="See posts by shihono">
+                <a href="./author/shihono.html" title="See posts by shihono">
                 </a>
                 <h2 class="article-info">shihono</h2>
                 <small class="about-author"></small>
@@ -47,8 +45,8 @@
                 <header class="post-header">
                     <h1>javascriptでtimerをつくりたい(1)</h1>
                         <p class="post-meta">
-                            // under                                 <a class="post-category" href="https://shihono.github.io/tag/javascript.html">javascript</a>
-                                <a class="post-category" href="https://shihono.github.io/tag/web_api.html">web_api</a>
+                            // under                                 <a class="post-category" href="./tag/javascript.html">javascript</a>
+                                <a class="post-category" href="./tag/web_api.html">web_api</a>
                         </p>
                 </header>
             </section>
@@ -80,22 +78,19 @@ htmlページでjavascriptを用いて,時間を計測するシステムであ�
 <h4>Date</h4>
 <p>時間を扱うオブジェクト.</p>
 <p>引数を与えない場合,現在時刻を取得する.</p>
-<div class="highlight"><pre><span></span><span class="nx">Start</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Date</span><span class="p">();</span>
-</pre></div>
-
+<div class="highlight"><pre><span></span><code><span class="nx">Start</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nb">Date</span><span class="p">();</span>
+</code></pre></div>
 
 <p>経過時間を計算したい場合は<code>getTime()</code>を用いる.</p>
 <p>これは1970/1/1からの経過時間(ミリ秒)を求めるので時間<code>Start</code>から<code>Stop</code>までの経過時間<code>T</code>は以下のように計算できる.</p>
-<div class="highlight"><pre><span></span><span class="nx">T</span> <span class="o">=</span> <span class="nx">Stop</span><span class="p">.</span><span class="nx">getTime</span><span class="p">()</span> <span class="o">-</span> <span class="nx">Start</span><span class="p">.</span><span class="nx">getTime</span><span class="p">();</span>
-</pre></div>
-
+<div class="highlight"><pre><span></span><code><span class="nx">T</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">Stop</span><span class="p">.</span><span class="nx">getTime</span><span class="p">()</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="nx">Start</span><span class="p">.</span><span class="nx">getTime</span><span class="p">();</span>
+</code></pre></div>
 
 <h4>setInterval</h4>
 <p>一定時間ごとに関数を呼び出す.
 引数の関数名はクオーテーションで囲む必要がある.</p>
-<div class="highlight"><pre><span></span><span class="nx">myInterval</span><span class="o">=</span><span class="nx">setInterval</span><span class="p">(</span><span class="s2">&quot;myWatch(1)&quot;</span><span class="p">,</span><span class="mi">1</span><span class="p">);</span>
-</pre></div>
-
+<div class="highlight"><pre><span></span><code><span class="nx">myInterval</span><span class="o">=</span><span class="nx">setInterval</span><span class="p">(</span><span class="s2">&quot;myWatch(1)&quot;</span><span class="p">,</span><span class="mf">1</span><span class="p">);</span>
+</code></pre></div>
 
 <p><code>clearInterval()</code>で解除するまで実行し続ける.</p>
 <h3>拡張したところ</h3>
@@ -123,10 +118,10 @@ htmlページでjavascriptを用いて,時間を計測するシステムであ�
             <!-- my setting : share botton-->
             <p>
                 share:
-                <a href="http://twitter.com/share?url=https://shihono.github.io/timer_js_memo.html&text=javascriptでtimerをつくりたい(1)//shoo shoo">
+                <a href="http://twitter.com/share?url=./timer_js_memo.html&text=javascriptでtimerをつくりたい(1)//shoo shoo">
                     <i class="fa fa-twitter fa-2x"></i>
                 </a>
-                <a href="https://www.facebook.com/sharer/sharer.php?u=https://shihono.github.io/timer_js_memo.html">
+                <a href="https://www.facebook.com/sharer/sharer.php?u=./timer_js_memo.html">
                     <i class="fa fa-facebook-square fa-2x"></i>
                 </a>
             </p>

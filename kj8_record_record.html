@@ -11,11 +11,9 @@
 
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/pure/0.3.0/pure-min.css">
     <!--add new font awesome -->
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/v4-shims.css">
-    <!--link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.1.0/css/font-awesome.min.css" -->
-    <link rel="stylesheet" href="https://shihono.github.io/theme/css/pure.css">
-    <link rel="stylesheet" href="https://shihono.github.io/theme/css/pygments.css">
+    <script src="https://kit.fontawesome.com/e2c3169965.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="./theme/css/pure.css">
+    <link rel="stylesheet" href="./theme/css/pygments.css">
 
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/fitvids/1.0.1/jquery.fitvids.min.js"></script>
@@ -31,7 +29,7 @@
     <div class="sidebar sidebar-article pure-u">
         <header class="header-article">
             <hgroup>
-                <a href="https://shihono.github.io/author/shihono.html" title="See posts by shihono">
+                <a href="./author/shihono.html" title="See posts by shihono">
                 </a>
                 <h2 class="article-info">shihono</h2>
                 <small class="about-author"></small>
@@ -47,9 +45,9 @@
                 <header class="post-header">
                     <h1>djangoアプリをつくってherokuに公開しました</h1>
                         <p class="post-meta">
-                            // under                                 <a class="post-category" href="https://shihono.github.io/tag/python.html">python</a>
-                                <a class="post-category" href="https://shihono.github.io/tag/django.html">django</a>
-                                <a class="post-category" href="https://shihono.github.io/tag/heroku.html">heroku</a>
+                            // under                                 <a class="post-category" href="./tag/python.html">python</a>
+                                <a class="post-category" href="./tag/django.html">django</a>
+                                <a class="post-category" href="./tag/heroku.html">heroku</a>
                         </p>
                 </header>
             </section>
@@ -130,17 +128,15 @@
 </ul>
 <h4>herokuにdeploy</h4>
 <p>herokuアプリに今あるデータを移行したいので, ローカルのデータベースにあるデータを<code>dumpdata</code>で保存します.(最初に<code>loaddata</code>したデータを修正しているためバックアップも兼ねて別ファイルに保存しました)</p>
-<div class="highlight"><pre><span></span><span class="err">python manage.py dumpdata songinfo.Song songinfo.Disc --format json --indent 1 &gt; songinfo/fixtures/dump_info.json</span>
-</pre></div>
-
+<div class="highlight"><pre><span></span><code>python manage.py dumpdata songinfo.Song songinfo.Disc --format json --indent 1 &gt; songinfo/fixtures/dump_info.json
+</code></pre></div>
 
 <p>このjsonファイルをふくめherokuにdeployしました.(deployの仕方は色んなサイトで紹介されているので割愛)
 heroku上のデータベースを初期化し<code>loaddata</code>すればローカルと同じデータを反映できます.</p>
-<div class="highlight"><pre><span></span><span class="err">heroku run python manage.py migrate</span>
-<span class="err">heroku run python manage.py createsuperuser</span>
-<span class="err">heroku run python manage.py loaddata song/fixtures/dump_info.json</span>
-</pre></div>
-
+<div class="highlight"><pre><span></span><code><span class="n">heroku</span><span class="w"> </span><span class="n">run</span><span class="w"> </span><span class="n">python</span><span class="w"> </span><span class="n">manage</span><span class="o">.</span><span class="n">py</span><span class="w"> </span><span class="n">migrate</span>
+<span class="n">heroku</span><span class="w"> </span><span class="n">run</span><span class="w"> </span><span class="n">python</span><span class="w"> </span><span class="n">manage</span><span class="o">.</span><span class="n">py</span><span class="w"> </span><span class="n">createsuperuser</span>
+<span class="n">heroku</span><span class="w"> </span><span class="n">run</span><span class="w"> </span><span class="n">python</span><span class="w"> </span><span class="n">manage</span><span class="o">.</span><span class="n">py</span><span class="w"> </span><span class="n">loaddata</span><span class="w"> </span><span class="n">song</span><span class="o">/</span><span class="n">fixtures</span><span class="o">/</span><span class="n">dump_info</span><span class="o">.</span><span class="n">json</span>
+</code></pre></div>
 
 <h5>deploy時のエラー</h5>
 <p>deployするとエラーがでまくるのは仕方ないのですが, </p>
@@ -165,10 +161,10 @@ webからデータとってくるのって本当に大変だなと改めて感�
             <!-- my setting : share botton-->
             <p>
                 share:
-                <a href="http://twitter.com/share?url=https://shihono.github.io/kj8_record_record.html&text=djangoアプリをつくってherokuに公開しました//shoo shoo">
+                <a href="http://twitter.com/share?url=./kj8_record_record.html&text=djangoアプリをつくってherokuに公開しました//shoo shoo">
                     <i class="fa fa-twitter fa-2x"></i>
                 </a>
-                <a href="https://www.facebook.com/sharer/sharer.php?u=https://shihono.github.io/kj8_record_record.html">
+                <a href="https://www.facebook.com/sharer/sharer.php?u=./kj8_record_record.html">
                     <i class="fa fa-facebook-square fa-2x"></i>
                 </a>
             </p>

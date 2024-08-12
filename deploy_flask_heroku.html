@@ -11,11 +11,9 @@
 
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/pure/0.3.0/pure-min.css">
     <!--add new font awesome -->
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/v4-shims.css">
-    <!--link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.1.0/css/font-awesome.min.css" -->
-    <link rel="stylesheet" href="https://shihono.github.io/theme/css/pure.css">
-    <link rel="stylesheet" href="https://shihono.github.io/theme/css/pygments.css">
+    <script src="https://kit.fontawesome.com/e2c3169965.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="./theme/css/pure.css">
+    <link rel="stylesheet" href="./theme/css/pygments.css">
 
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/fitvids/1.0.1/jquery.fitvids.min.js"></script>
@@ -31,7 +29,7 @@
     <div class="sidebar sidebar-article pure-u">
         <header class="header-article">
             <hgroup>
-                <a href="https://shihono.github.io/author/shihono.html" title="See posts by shihono">
+                <a href="./author/shihono.html" title="See posts by shihono">
                 </a>
                 <h2 class="article-info">shihono</h2>
                 <small class="about-author"></small>
@@ -47,9 +45,9 @@
                 <header class="post-header">
                     <h1>flaskをherokuにdeployする</h1>
                         <p class="post-meta">
-                            // under                                 <a class="post-category" href="https://shihono.github.io/tag/python.html">python</a>
-                                <a class="post-category" href="https://shihono.github.io/tag/flask.html">flask</a>
-                                <a class="post-category" href="https://shihono.github.io/tag/heroku.html">heroku</a>
+                            // under                                 <a class="post-category" href="./tag/python.html">python</a>
+                                <a class="post-category" href="./tag/flask.html">flask</a>
+                                <a class="post-category" href="./tag/heroku.html">heroku</a>
                         </p>
                 </header>
             </section>
@@ -97,11 +95,10 @@
 </ul>
 </li>
 </ul>
-<div class="highlight"><pre><span></span><span class="err">!     The latest version of Python 3 is python-3.6.5 (you are using python-3.5.3, which is unsupported).</span>
-<span class="err">!     We recommend upgrading by specifying the latest version (python-3.6.5).</span>
-<span class="err">       Learn More: https://devcenter.heroku.com/articles/python-runtimes</span>
-</pre></div>
-
+<div class="highlight"><pre><span></span><code>!     The latest version of Python 3 is python-3.6.5 (you are using python-3.5.3, which is unsupported).
+!     We recommend upgrading by specifying the latest version (python-3.6.5).
+       Learn More: https://devcenter.heroku.com/articles/python-runtimes
+</code></pre></div>
 
 <h2>デプロイ</h2>
 <p>今回はHeroku CLIを利用.</p>
@@ -110,10 +107,9 @@
 <li><code>heroku login</code>でログイン</li>
 <li>gitを初期化してremoteをcloneする</li>
 </ul>
-<div class="highlight"><pre><span></span><span class="err">git init</span>
-<span class="err">heroku git:clone -a heroku-app-name</span>
-</pre></div>
-
+<div class="highlight"><pre><span></span><code>git init
+heroku git:clone -a heroku-app-name
+</code></pre></div>
 
 <ul>
 <li>あとは<code>git add + commit</code>して,<code>git push heroku master</code>でデプロイ完了</li>
@@ -137,10 +133,10 @@
             <!-- my setting : share botton-->
             <p>
                 share:
-                <a href="http://twitter.com/share?url=https://shihono.github.io/deploy_flask_heroku.html&text=flaskをherokuにdeployする//shoo shoo">
+                <a href="http://twitter.com/share?url=./deploy_flask_heroku.html&text=flaskをherokuにdeployする//shoo shoo">
                     <i class="fa fa-twitter fa-2x"></i>
                 </a>
-                <a href="https://www.facebook.com/sharer/sharer.php?u=https://shihono.github.io/deploy_flask_heroku.html">
+                <a href="https://www.facebook.com/sharer/sharer.php?u=./deploy_flask_heroku.html">
                     <i class="fa fa-facebook-square fa-2x"></i>
                 </a>
             </p>

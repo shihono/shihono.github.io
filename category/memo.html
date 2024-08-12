@@ -11,10 +11,8 @@
 
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/pure/0.3.0/pure-min.css">
     <!--add new font awesome -->
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/v4-shims.css">
-    <!--link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.1.0/css/font-awesome.min.css" -->
-    <link rel="stylesheet" href="https://shihono.github.io/theme/css/pure.css">
+    <script src="https://kit.fontawesome.com/e2c3169965.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="../theme/css/pure.css">
 
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
 </head>
@@ -50,9 +48,9 @@
 Posts in 'memo'                </h1>
 <section class="post">
     <header class="post-header">
-        <a href="https://shihono.github.io/author/shihono.html" title="See posts by shihono">
+        <a href="../author/shihono.html" title="See posts by shihono">
         </a>
-        <h3><a class="post-title" href="https://shihono.github.io/link_collection.html">リンク一覧</a></h3>
+        <h3><a class="post-title" href="../link_collection.html">リンク一覧</a></h3>
             <p class="post-meta"><p>現在利用しているサービス一覧。</p>
 <ul>
 <li>GitHub Pages(ココ)    <a href="https://shihono.github.io">https://shihono.github.io</a></li>
@@ -61,40 +59,27 @@ Posts in 'memo'                </h1>
 <li>twitter   <a href="https://twitter.com/sh1_hono">https://twitter.com/sh1_hono</a></li>
 <li>Speaker Deck  <a href="https://speakerdeck.com/shihono/">https://speakerdeck.com/shihono/</a></li>
 </ul>
-<p>随時更新。</p></p>
+<p>随時 …</p></p>
             <p class="post-meta">
-                in <a href="https://shihono.github.io/category/memo.html">memo</a> &middot; 14-10-2019
+                in <a href="../category/memo.html">memo</a> &middot; 14-10-2019
             </p>
     </header>
 </section><section class="post">
     <header class="post-header">
-        <a href="https://shihono.github.io/author/shihono.html" title="See posts by shihono">
+        <a href="../author/shihono.html" title="See posts by shihono">
         </a>
-        <h3><a class="post-title" href="https://shihono.github.io/share_post_template.html">共有ボタンを作る</a></h3>
+        <h3><a class="post-title" href="../share_post_template.html">共有ボタンを作る</a></h3>
             <p class="post-meta"><p>使っているテーマのテンプレートには共有ボタンみたいなものがデフォルトでついていません。</p>
-<p>Pelican pluginに<a href="https://github.com/getpelican/pelican-plugins/tree/master/share_post">share_post</a>という拡張プラグインもあるのですが、いまいちわからず。</p>
-<p>簡単に実装できるのではないか、と思い、自分でテンプレートを編集してみることにしました。</p>
-<p>出来上がったものは記事の一番下に設置しています。</p>
-<h3>変更内容</h3>
-<p>今回はtwitterとfacebookだけ作成してみます。
-javascriptなどは使わず、WEB APIを指定したaタグをページに置くことにしました。</p>
-<p>WEB APIはそれぞれ以下の通り。</p>
-<ul>
-<li>twitter : <code>http://twitter.com/share?url={{ 記事のURL }}&amp;text={{ タイトル }}</code></li>
-<li>facebook : <code>https://www.facebook.com/sharer/sharer.php?u={{ 記事のURL }}</code></li>
-</ul>
-<p>これを記事のテンプレート(テーマの<code>templetes/article.html</code>)に組み込みます。記事のURLとタイトルを示す変数は<a href="http://docs.getpelican.com/en/stable/themes.html">ドキュメント</a>を参考にしました。</p>
-<p>表示するアイコンは<a href="http://fontawesome.io/icons/">fontawesome</a>から取得します。</p>
-<p>(表示されないアイコンがあったため、font-awesomeのCDNを新しいversionに変更しました …</p></p>
+<p>Pelican pluginに<a href="https://github.com/getpelican/pelican-plugins/tree/master/share_post">share_post</a>という拡張 …</p></p>
             <p class="post-meta">
-                in <a href="https://shihono.github.io/category/memo.html">memo</a> &middot; 27-03-2018
+                in <a href="../category/memo.html">memo</a> &middot; 27-03-2018
             </p>
     </header>
 </section><section class="post">
     <header class="post-header">
-        <a href="https://shihono.github.io/author/shihono.html" title="See posts by shihono">
+        <a href="../author/shihono.html" title="See posts by shihono">
         </a>
-        <h3><a class="post-title" href="https://shihono.github.io/pelican_setting.html">test's test（＋pelican仕様のメモ）</a></h3>
+        <h3><a class="post-title" href="../pelican_setting.html">test's test（＋pelican仕様のメモ）</a></h3>
             <p class="post-meta"><p>GitHub Pagesをちゃんと使いたい.</p>
 <p>pelicanを設定したものの毎回設定内容を忘れてしまって初期化してました.
 これで3回目です.
@@ -110,24 +95,9 @@ javascriptなどは使わず、WEB APIを指定したaタグをページに置�
 <p>pelican-theme : <a href="https://github.com/PurePelicanTheme/pure">Pure</a></p>
 <ul>
 <li>名前通りpure cssを使っているpelicanのテーマ</li>
-<li>研究室の個人ページでもpureを使っているのでこっちでも使用することにした</li>
-<li>いろんなフレームワーク試した中で一番しっくりきたのがpure. サイトに乗っている<a href="https://purecss.io/layouts/">example layouts</a>もおしゃれなのでそのまま使えるレベル.</li>
-</ul>
-</li>
-<li>
-<p>side-bar image : <a href="https://unsplash.com">unsplash</a></p>
-<ul>
-<li>画像をヘッダー/サイドバーとして設定できるのでunsplashの写真を利用することにした</li>
-<li><a href="https://donsyoku.com/website/about-unsplash.html">参考</a></li>
-<li>APIを叩いて取得することもできる --&gt; <a href="https://source.unsplash.com">Unsplash Source</a></li>
-</ul>
-</li>
-</ul>
-<p>こんなふうに</p>
-<p><img alt="ランダム取得" src="https://source.unsplash.com/random/800x600"></p>
-<p>とりあえずこんな感じでやっていきます. </p></p>
+<li>研究室の …</li></ul></li></ul></p>
             <p class="post-meta">
-                in <a href="https://shihono.github.io/category/memo.html">memo</a> &middot; 26-03-2018
+                in <a href="../category/memo.html">memo</a> &middot; 26-03-2018
             </p>
     </header>
 </section><div class="pagination-wrapper content-subhead">

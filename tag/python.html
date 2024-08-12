@@ -11,10 +11,8 @@
 
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/pure/0.3.0/pure-min.css">
     <!--add new font awesome -->
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/v4-shims.css">
-    <!--link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.1.0/css/font-awesome.min.css" -->
-    <link rel="stylesheet" href="https://shihono.github.io/theme/css/pure.css">
+    <script src="https://kit.fontawesome.com/e2c3169965.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="../theme/css/pure.css">
 
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
 </head>
@@ -50,51 +48,24 @@
 Posts tagged 'python'                </h1>
 <section class="post">
     <header class="post-header">
-        <a href="https://shihono.github.io/author/shihono.html" title="See posts by shihono">
+        <a href="../author/shihono.html" title="See posts by shihono">
         </a>
-        <h3><a class="post-title" href="https://shihono.github.io/kj8_record_record.html">djangoアプリをつくってherokuに公開しました</a></h3>
+        <h3><a class="post-title" href="../kj8_record_record.html">djangoアプリをつくってherokuに公開しました</a></h3>
             <p class="post-meta"><p>タイトル通り,djangoアプリをつくってherokuに公開しました.</p>
 <p><i class="fa fa-infinity"></i> <strong>kj8recordrecord</strong> という趣味全開のアプリです.</p>
 <p>URL： <a href="https://kj8-record-record.herokuapp.com">https://kj8-record-record.herokuapp.com</a></p>
 <p><a href="https://github.com/shihono/kj8-record-record">github</a>にコードをあげています.</p>
 <h3>どんなアプリ？</h3>
-<p>関ジャニ∞の曲名・CD情報を表示するアプリケーションです(<strong>関ジャニ∞だけ</strong>です) </p>
-<p>表示できること</p>
-<ul>
-<li>CD一覧</li>
-<li>CDの収録曲</li>
-<li>表示された曲と同じ曲名が収録されたCD</li>
-</ul>
-<h3>作成手順</h3>
-<ol>
-<li>データ作成</li>
-<li>データベースにいれる   </li>
-<li>表示機能の作成</li>
-<li>herokuにdeploy</li>
-</ol>
-<p>それぞれ詳細について書きます.</p>
-<h4>データ作成</h4>
-<p>欲しいデータは以下のようなもの.</p>
-<ul>
-<li>CD ： タイトル, シングルorアルバム, 発売日 (model : Disc)</li>
-<li>曲 ： タイトル, 収録されているCD, CD内の曲順  (model : Song)</li>
-</ul>
-<p>早速曲情報データベースから取得しようとしたものの</p>
-<ul>
-<li><a href="http://www2.jasrac.or.jp/eJwid/index.html">ジャスラック</a> ：曲情報だけ</li>
-<li><a href="https://musicbrainz.org/">MusicBrain</a>：2014年で情報が止まっている</li>
-<li><a href="https://freedbtest.dyndns.org">freedb</a>： 情報にヌケモレがあるためスクレイピング後にゴミ取り作業が発生する</li>
-</ul>
-<p>といった理由から …</p></p>
+<p>関ジャニ∞の曲 …</p></p>
             <p class="post-meta">
-                in <a href="https://shihono.github.io/category/python.html">python</a> &middot; 31-08-2018
+                in <a href="../category/python.html">python</a> &middot; 31-08-2018
             </p>
     </header>
 </section><section class="post">
     <header class="post-header">
-        <a href="https://shihono.github.io/author/shihono.html" title="See posts by shihono">
+        <a href="../author/shihono.html" title="See posts by shihono">
         </a>
-        <h3><a class="post-title" href="https://shihono.github.io/deploy_flask_heroku.html">flaskをherokuにdeployする</a></h3>
+        <h3><a class="post-title" href="../deploy_flask_heroku.html">flaskをherokuにdeployする</a></h3>
             <p class="post-meta"><p>Flaskで作ったアプリをHerokuにデプロイしたかったのだが,色々突っかかったのでメモ.</p>
 <h2>ファイル一覧</h2>
 <h3>Flaskファイル</h3>
@@ -107,57 +78,24 @@ Posts tagged 'python'                </h1>
 </li>
 </ul>
 <h3>Herokuに必要なファイル</h3>
-<p>この記事のメイン.</p>
-<p>Herokuに依存関係を特定させるために以下のファイルを作成する必要がある.(以下のファイルは<code>app.py</code>と同じ階層に置く)</p>
-<ul>
-<li>
-<p>Procfile</p>
-<ul>
-<li>実行するコマンドを宣言するファイル</li>
-<li><a href="https://devcenter.heroku.com/articles/python-gunicorn">gnicorn</a>を使うといいみたいなのでpip installしておく</li>
-<li>書き方は<code>プロセスタイプ:コマンド</code> という感じ.</li>
-<li>app.pyを実行してほしい --&gt; <code>web: gunicorn app:app --log-file=-</code></li>
-</ul>
-</li>
-<li>
-<p>requirements.txt</p>
-<ul>
-<li>必要なPythonパッケージを記入<ul>
-<li><code>Flask</code>,<code>gnicorn</code> etc...</li>
-</ul>
-</li>
-<li>バージョンも書いておかないと<code>No such file or …</code></li></ul></li></ul></p>
+<p>この記事のメ …</p></p>
             <p class="post-meta">
-                in <a href="https://shihono.github.io/category/python.html">python</a> &middot; 10-05-2018
+                in <a href="../category/python.html">python</a> &middot; 10-05-2018
             </p>
     </header>
 </section><section class="post">
     <header class="post-header">
-        <a href="https://shihono.github.io/author/shihono.html" title="See posts by shihono">
+        <a href="../author/shihono.html" title="See posts by shihono">
         </a>
-        <h3><a class="post-title" href="https://shihono.github.io/itertool_dropwhile_takewhile.html">dropwhileとtakewhileを使う</a></h3>
+        <h3><a class="post-title" href="../itertool_dropwhile_takewhile.html">dropwhileとtakewhileを使う</a></h3>
             <p class="post-meta"><p>pythonの便利ライブラリ<a href="https://docs.python.jp/3/library/itertools.html">itertools</a>.
 その中の<code>dropwhile</code>と<code>takewhile</code>を使うときのメモ.</p>
 <h2>iteratorの例</h2>
 <p>100本ノック10章91で用いている<a href="https://aclweb.org/aclwiki/Google_analogy_test_set_(State_of_the_art)">単語アナロジー評価データ</a>を例に考えます。</p>
 <blockquote>
-<p>このデータ中で": "で始まる行はセクション名を表す．例えば，": capital-common-countries"という行は，"capital-common-countries"というセクションの開始を表している．</p>
-</blockquote>
-<p><cite><a href="http://www.cl.ecei.tohoku.ac.jp/nlp100/#sec91">言語処理100本ノック 2015より</a></cite></p>
-<h3>dropwhile</h3>
-<p>条件がtrueの間無視(drop)して,falseになった場所からはじめる.
-条件はlambda式を使う。</p>
-<p>例えば<code>family</code>というセクション<em>以降</em>のデータが欲しい時は下のようになる。</p>
-<div class="highlight"><pre><span></span><span class="n">dropwhile</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span> <span class="o">!=</span> <span class="s1">&#39;: family</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">f</span><span class="p">)</span>
-</pre></div>
-
-
-<h3>takewhile</h3>
-<p>条件がtrueの間に続けて,falseになったら終了.</p>
-<p>例えば<code>family</code>というセクション<em>より前</em>のデータだけ取得する時は下のようになる。</p>
-<div class="highlight"><pre><span></span><span class="n">takewhile</span><span class="p">(</span><span class="k">lambda</span> <span class="n">y</span><span class="p">:</span> <span class="n">y …</span></pre></div></p>
+<p>このデータ中で": "で始まる行 …</p></blockquote></p>
             <p class="post-meta">
-                in <a href="https://shihono.github.io/category/python.html">python</a> &middot; 17-04-2018
+                in <a href="../category/python.html">python</a> &middot; 17-04-2018
             </p>
     </header>
 </section><div class="pagination-wrapper content-subhead">
