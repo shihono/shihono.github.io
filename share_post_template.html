@@ -11,11 +11,9 @@
 
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/pure/0.3.0/pure-min.css">
     <!--add new font awesome -->
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/v4-shims.css">
-    <!--link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.1.0/css/font-awesome.min.css" -->
-    <link rel="stylesheet" href="https://shihono.github.io/theme/css/pure.css">
-    <link rel="stylesheet" href="https://shihono.github.io/theme/css/pygments.css">
+    <script src="https://kit.fontawesome.com/e2c3169965.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="./theme/css/pure.css">
+    <link rel="stylesheet" href="./theme/css/pygments.css">
 
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/fitvids/1.0.1/jquery.fitvids.min.js"></script>
@@ -31,7 +29,7 @@
     <div class="sidebar sidebar-article pure-u">
         <header class="header-article">
             <hgroup>
-                <a href="https://shihono.github.io/author/shihono.html" title="See posts by shihono">
+                <a href="./author/shihono.html" title="See posts by shihono">
                 </a>
                 <h2 class="article-info">shihono</h2>
                 <small class="about-author"></small>
@@ -47,7 +45,7 @@
                 <header class="post-header">
                     <h1>共有ボタンを作る</h1>
                         <p class="post-meta">
-                            // under                                 <a class="post-category" href="https://shihono.github.io/tag/pelican.html">pelican</a>
+                            // under                                 <a class="post-category" href="./tag/pelican.html">pelican</a>
                         </p>
                 </header>
             </section>
@@ -69,17 +67,16 @@ javascriptなどは使わず、WEB APIを指定したaタグをページに置�
 <p><i class="fa fa-font-awesome"></i> アイコン例</p>
 <h3>完成したコード</h3>
 <p>記事の一番下に表示するように<code>article.html</code>にコピペしました。</p>
-<div class="highlight"><pre><span></span><span class="nt">&lt;p&gt;</span>
-    share:
-    <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">&quot;http://twitter.com/share?url=</span><span class="cp">{{</span> <span class="nv">SITEURL</span> <span class="cp">}}</span><span class="s">/</span><span class="cp">{{</span> <span class="nv">article.url</span> <span class="cp">}}</span><span class="s">&amp;text=</span><span class="cp">{{</span> <span class="nv">article.title</span> <span class="cp">}}</span><span class="s">//</span><span class="cp">{{</span> <span class="nv">SITENAME</span> <span class="cp">}}</span><span class="s">&quot;</span><span class="nt">&gt;</span>
-        <span class="nt">&lt;i</span> <span class="na">class=</span><span class="s">&quot;fa fa-twitter fa-2x&quot;</span><span class="nt">&gt;&lt;/i&gt;</span>
-    <span class="nt">&lt;/a&gt;</span>
-    <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">&quot;https://www.facebook.com/sharer/sharer.php?u=</span><span class="cp">{{</span> <span class="nv">SITEURL</span> <span class="cp">}}</span><span class="s">/</span><span class="cp">{{</span> <span class="nv">article.url</span> <span class="cp">}}</span><span class="s">&quot;</span><span class="nt">&gt;</span>
-        <span class="nt">&lt;i</span> <span class="na">class=</span><span class="s">&quot;fa fa-facebook-square fa-2x&quot;</span><span class="nt">&gt;&lt;/i&gt;</span>
-    <span class="nt">&lt;/a&gt;</span>
+<div class="highlight"><pre><span></span><code><span class="nt">&lt;p&gt;</span>
+<span class="w">    </span>share:
+<span class="w">    </span><span class="nt">&lt;a</span><span class="w"> </span><span class="na">href=</span><span class="s">&quot;http://twitter.com/share?url=</span><span class="cp">{{</span> <span class="nv">SITEURL</span> <span class="cp">}}</span><span class="s">/</span><span class="cp">{{</span> <span class="nv">article.url</span> <span class="cp">}}</span><span class="s">&amp;text=</span><span class="cp">{{</span> <span class="nv">article.title</span> <span class="cp">}}</span><span class="s">//</span><span class="cp">{{</span> <span class="nv">SITENAME</span> <span class="cp">}}</span><span class="s">&quot;</span><span class="nt">&gt;</span>
+<span class="w">        </span><span class="nt">&lt;i</span><span class="w"> </span><span class="na">class=</span><span class="s">&quot;fa fa-twitter fa-2x&quot;</span><span class="nt">&gt;&lt;/i&gt;</span>
+<span class="w">    </span><span class="nt">&lt;/a&gt;</span>
+<span class="w">    </span><span class="nt">&lt;a</span><span class="w"> </span><span class="na">href=</span><span class="s">&quot;https://www.facebook.com/sharer/sharer.php?u=</span><span class="cp">{{</span> <span class="nv">SITEURL</span> <span class="cp">}}</span><span class="s">/</span><span class="cp">{{</span> <span class="nv">article.url</span> <span class="cp">}}</span><span class="s">&quot;</span><span class="nt">&gt;</span>
+<span class="w">        </span><span class="nt">&lt;i</span><span class="w"> </span><span class="na">class=</span><span class="s">&quot;fa fa-facebook-square fa-2x&quot;</span><span class="nt">&gt;&lt;/i&gt;</span>
+<span class="w">    </span><span class="nt">&lt;/a&gt;</span>
 <span class="nt">&lt;/p&gt;</span>
-</pre></div>
-
+</code></pre></div>
 
 <p>めでたし。</p>
 <h3>参考</h3>
@@ -89,10 +86,10 @@ javascriptなどは使わず、WEB APIを指定したaタグをページに置�
             <!-- my setting : share botton-->
             <p>
                 share:
-                <a href="http://twitter.com/share?url=https://shihono.github.io/share_post_template.html&text=共有ボタンを作る//shoo shoo">
+                <a href="http://twitter.com/share?url=./share_post_template.html&text=共有ボタンを作る//shoo shoo">
                     <i class="fa fa-twitter fa-2x"></i>
                 </a>
-                <a href="https://www.facebook.com/sharer/sharer.php?u=https://shihono.github.io/share_post_template.html">
+                <a href="https://www.facebook.com/sharer/sharer.php?u=./share_post_template.html">
                     <i class="fa fa-facebook-square fa-2x"></i>
                 </a>
             </p>

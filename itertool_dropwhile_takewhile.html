@@ -11,11 +11,9 @@
 
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/pure/0.3.0/pure-min.css">
     <!--add new font awesome -->
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/v4-shims.css">
-    <!--link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.1.0/css/font-awesome.min.css" -->
-    <link rel="stylesheet" href="https://shihono.github.io/theme/css/pure.css">
-    <link rel="stylesheet" href="https://shihono.github.io/theme/css/pygments.css">
+    <script src="https://kit.fontawesome.com/e2c3169965.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="./theme/css/pure.css">
+    <link rel="stylesheet" href="./theme/css/pygments.css">
 
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/fitvids/1.0.1/jquery.fitvids.min.js"></script>
@@ -31,7 +29,7 @@
     <div class="sidebar sidebar-article pure-u">
         <header class="header-article">
             <hgroup>
-                <a href="https://shihono.github.io/author/shihono.html" title="See posts by shihono">
+                <a href="./author/shihono.html" title="See posts by shihono">
                 </a>
                 <h2 class="article-info">shihono</h2>
                 <small class="about-author"></small>
@@ -47,7 +45,7 @@
                 <header class="post-header">
                     <h1>dropwhileとtakewhileを使う</h1>
                         <p class="post-meta">
-                            // under                                 <a class="post-category" href="https://shihono.github.io/tag/python.html">python</a>
+                            // under                                 <a class="post-category" href="./tag/python.html">python</a>
                         </p>
                 </header>
             </section>
@@ -63,28 +61,26 @@
 <p>条件がtrueの間無視(drop)して,falseになった場所からはじめる.
 条件はlambda式を使う。</p>
 <p>例えば<code>family</code>というセクション<em>以降</em>のデータが欲しい時は下のようになる。</p>
-<div class="highlight"><pre><span></span><span class="n">dropwhile</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span> <span class="o">!=</span> <span class="s1">&#39;: family</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">f</span><span class="p">)</span>
-</pre></div>
-
+<div class="highlight"><pre><span></span><code><span class="n">dropwhile</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span> <span class="o">!=</span> <span class="s1">&#39;: family</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">f</span><span class="p">)</span>
+</code></pre></div>
 
 <h3>takewhile</h3>
 <p>条件がtrueの間に続けて,falseになったら終了.</p>
 <p>例えば<code>family</code>というセクション<em>より前</em>のデータだけ取得する時は下のようになる。</p>
-<div class="highlight"><pre><span></span><span class="n">takewhile</span><span class="p">(</span><span class="k">lambda</span> <span class="n">y</span><span class="p">:</span> <span class="n">y</span> <span class="o">==</span> <span class="s1">&#39;: family</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">f</span><span class="p">)</span>
-</pre></div>
-
+<div class="highlight"><pre><span></span><code><span class="n">takewhile</span><span class="p">(</span><span class="k">lambda</span> <span class="n">y</span><span class="p">:</span> <span class="n">y</span> <span class="o">==</span> <span class="s1">&#39;: family</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">f</span><span class="p">)</span>
+</code></pre></div>
 
 <h3>合わせ技</h3>
 <p><code>: family</code>以前は無視して、次の<code>:</code>になったら終了.</p>
-<div class="highlight"><pre><span></span><span class="n">takewhile</span><span class="p">(</span><span class="k">lambda</span> <span class="n">y</span><span class="p">:</span> <span class="n">y</span> <span class="o">==</span> <span class="s1">&#39;: family</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">y</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;:&#39;</span><span class="p">),</span> <span class="n">dropwhile</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span> <span class="o">!=</span> <span class="s1">&#39;: family</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">f</span><span class="p">)):</span>
-</pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">takewhile</span><span class="p">(</span><span class="k">lambda</span> <span class="n">y</span><span class="p">:</span> <span class="n">y</span> <span class="o">==</span> <span class="s1">&#39;: family</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">y</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;:&#39;</span><span class="p">),</span> <span class="n">dropwhile</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span> <span class="o">!=</span> <span class="s1">&#39;: family</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">f</span><span class="p">)):</span>
+</code></pre></div>
             <!-- my setting : share botton-->
             <p>
                 share:
-                <a href="http://twitter.com/share?url=https://shihono.github.io/itertool_dropwhile_takewhile.html&text=dropwhileとtakewhileを使う//shoo shoo">
+                <a href="http://twitter.com/share?url=./itertool_dropwhile_takewhile.html&text=dropwhileとtakewhileを使う//shoo shoo">
                     <i class="fa fa-twitter fa-2x"></i>
                 </a>
-                <a href="https://www.facebook.com/sharer/sharer.php?u=https://shihono.github.io/itertool_dropwhile_takewhile.html">
+                <a href="https://www.facebook.com/sharer/sharer.php?u=./itertool_dropwhile_takewhile.html">
                     <i class="fa fa-facebook-square fa-2x"></i>
                 </a>
             </p>
